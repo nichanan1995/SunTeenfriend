@@ -1,15 +1,18 @@
 package nichanan.sunteen.co.th.sunteenfriend.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,17 +77,37 @@ public class RegisterFragment extends Fragment {
                             "please fill all bank");
         }
              else {
-
+//            No Space
+            uploadImage();
         }
 
     }//upload
+
+    private void uploadImage() {
+//        find path Image
+        String pathString =null;
+        String[] strings = new String[]{MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(uri, strings, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            pathString = cursor.getString(index);
+
+
+    }else{
+            pathString = uri.getPath();
+
+        }
+        Log.d("8Julyv1", "Path ==>" + pathString);
+    }
+
 
     private void pictureController() {
         imageView = getView().findViewById(R.id.imvPicture);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "choose app"), 1);
             }
