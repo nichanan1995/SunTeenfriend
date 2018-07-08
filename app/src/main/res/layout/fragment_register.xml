@@ -14,24 +14,33 @@
 
     <!--Picture-->
     <ImageView
-        android:layout_margin="20dp"
+
+android:scaleType="centerInside"
+       android:id="@+id/imvPicture"
+       android:layout_gravity="center_horizontal"
         android:src="@drawable/picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="250dp"
+        android:layout_height="200dp" />
     <!--Name-->
     <EditText
+        android:id="@+id/editname"
+        android:inputType="text"
+        android:layout_marginTop="10dp"
         android:hint="Name :"
         android:background="@drawable/regis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <!--User-->
     <EditText
-        android:hint="User :"
-        android:background="@drawable/user"
+        android:id="@+id/edtuser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/user"
+        android:hint="User :" />
     <!--Password-->
     <EditText
+        android:id="@+id/edtpass"
+        android:inputType="text"
         android:hint="Password :"
         android:background="@drawable/pass"
         android:layout_width="match_parent"
